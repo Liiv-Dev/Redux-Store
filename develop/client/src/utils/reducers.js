@@ -10,47 +10,47 @@ import {
   TOGGLE_CART,
 } from './actions';
 
-// TODO: To get a better understand of how a reducer works - add comments to the various actions in the reducer
 export const reducer = (state, action) => {
-  switch (action.type) {
-    // TODO: Add a comment describing the functionality of the UPDATE_PRODUCTS case
-    // Your comment here
+  switch (action.type) { 
+
+    // it returns a new state where the products property is updated by adding a new array of products to it
     case UPDATE_PRODUCTS:
       return {
-        ...state,
-        products: [...action.products],
+        ...state, // this is spreading the existing state into the new state
+        products: [...action.products], // this is spreading the products array from the action into the new state
       };
 
+    // it returns a new state where the cart property is updated by adding a new product to it
     case ADD_TO_CART:
       return {
         ...state,
-        cartOpen: true,
-        cart: [...state.cart, action.product],
+        cartOpen: true, // this is setting the cartOpen property to true
+        cart: [...state.cart, action.product], // this is adding the product to the cart
       };
 
+    // it returns a new state where the cart property is updated by adding multiple products to it
     case ADD_MULTIPLE_TO_CART:
       return {
         ...state,
-        cart: [...state.cart, ...action.products],
+        cart: [...state.cart, ...action.products], // this is adding the products to the cart
       };
-    // TODO: Add a comment describing the functionality of the UPDATE_CART_QUANTITY case
-    // Your comment here
+
+    // it returns a new state where the cart property is updated by updating the purchaseQuantity of a product
     case UPDATE_CART_QUANTITY:
       return {
         ...state,
         cartOpen: true,
-        cart: state.cart.map((product) => {
-          if (action._id === product._id) {
-            product.purchaseQuantity = action.purchaseQuantity;
-          }
+        cart: state.cart.map((product) => { // this is mapping over the cart array
+          if (action._id === product._id) { 
+            product.purchaseQuantity = action.purchaseQuantity; // this is updating the purchaseQuantity of the product
+          } 
           return product;
         }),
       };
 
-    // TODO: Add a comment describing the functionality of the REMOVE_FROM_CART case
-    // Your comment here
+    // it returns a new state where the cart property is updated by removing a product from it
     case REMOVE_FROM_CART:
-      let newState = state.cart.filter((product) => {
+      let newState = state.cart.filter((product) => { // this is filtering the cart array
         return product._id !== action._id;
       });
 
@@ -85,8 +85,8 @@ export const reducer = (state, action) => {
         currentCategory: action.currentCategory,
       };
 
-    // TODO: Add a comment describing what the default case is for
-    // Your comment here
+    
+    // if the action.type doesn't match any of the cases, it returns the state as is
     default:
       return state;
   }
