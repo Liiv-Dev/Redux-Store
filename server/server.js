@@ -22,6 +22,7 @@ const startApolloServer = async () => {
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
+  
   // Enable All CORS Requests
 app.use(cors());
 
