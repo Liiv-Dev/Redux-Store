@@ -3,6 +3,7 @@ const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
+const cors = require('cors');
 require('dotenv').config();
 
 const { typeDefs, resolvers } = require('./schemas');
@@ -21,6 +22,8 @@ const startApolloServer = async () => {
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
+  // Enable All CORS Requests
+app.use(cors());
 
   // Serve up static assets
   app.use('/images', express.static(path.join(__dirname, '../client/images')));
